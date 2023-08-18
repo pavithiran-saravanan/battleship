@@ -47,3 +47,34 @@ test("Random ships placement", () => {
   });
   expect(occupiedPositions).toBe(17);
 });
+
+test("Attack: Hit and Miss", () => {
+  const gameboard = getGameBoard();
+  gameboard.placeShip(0, 0, 0, "x");
+  expect(gameboard.receiveAttack(0, 0)).toBeTruthy();
+  expect(gameboard.receiveAttack(0, 0)).toBeFalsy();
+  expect(gameboard.receiveAttack(1, 0)).toBeFalsy();
+});
+
+test("Ship is sunk", () => {
+  const gameboard = getGameBoard();
+  gameboard.placeShip(0, 0, 0, "x");
+  for (let i = 0; i < 5; i += 1) gameboard.receiveAttack(0, i);
+  expect(gameboard.ships[0].isSunk()).toBeTruthy();
+});
+
+test("All Ships are sunk", () => {
+  const gameboard = getGameBoard();
+  const { ships } = gameboard;
+  ships.forEach((ship, index) => {
+    gameboard.placeShip(index, index, 0, "x");
+  });
+  ships.forEach((ship, index) => {
+    const len = ship.length;
+    for (let i = 0; i < len; i += 1) {
+      gameboard.receiveAttack(index, i);
+    }
+  });
+  expect(gameboard.isGameOver()).toBeTruthy();
+  console.log(ships);
+});

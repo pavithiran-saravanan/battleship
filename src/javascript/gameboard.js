@@ -26,6 +26,7 @@ function getShips() {
 
 export default function getGameBoard() {
   const ships = getShips();
+  const placement = Array(5).fill(null);
   const board = createBoard();
 
   // Returns the name of ship given the Ship Id
@@ -69,19 +70,18 @@ export default function getGameBoard() {
   // Place a given ship at specified position along specified direction
   function placeShip(id, row, col, axis) {
     if (!isPlacementValid(row, col, axis, ships[id].length)) return false;
-
+    placement[id] = { row, col, axis };
     if (axis === "x") {
       for (let i = col; i < col + ships[id].length; i += 1) {
         board[row][i].hasShip = true;
-        board[row][i].ship = getShipName(id);
+        board[row][i].ship = id;
       }
     } else {
       for (let i = row; i < row + ships[id].length; i += 1) {
         board[i][col].hasShip = true;
-        board[i][col].ship = getShipName(id);
+        board[i][col].ship = id;
       }
     }
-
     return true;
   }
 
@@ -102,9 +102,33 @@ export default function getGameBoard() {
     });
   }
 
+  // Receive Attack
+  function receiveAttack(row, col) {
+    const cell = board[row][col];
+    if (cell.isHit) return false;
+    cell.isHit = true;
+    if (cell.hasShip) {
+      const shipId = cell.ship;
+      ships[shipId].hit();
+      return true;
+    }
+    return false;
+  }
+
+  // Check if all ships have been sunk
+  function isGameOver() {
+    for (let i = 0; i < ships.length; i += 1) {
+      if (!ships[i].isSunk()) return false;
+    }
+    return true;
+  }
+
   return {
     board,
+    ships,
     placeShip,
     placeShipsRandom,
+    receiveAttack,
+    isGameOver,
   };
 }
