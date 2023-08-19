@@ -116,7 +116,7 @@ export default function getGameBoard() {
   }
 
   // Check if all ships have been sunk
-  function isGameOver() {
+  function allShipsSunk() {
     for (let i = 0; i < ships.length; i += 1) {
       if (!ships[i].isSunk()) return false;
     }
@@ -129,6 +129,6 @@ export default function getGameBoard() {
     placeShip,
     placeShipsRandom,
     receiveAttack,
-    isGameOver,
+    allShipsSunk,
   };
 }

@@ -75,6 +75,6 @@ test("All Ships are sunk", () => {
       gameboard.receiveAttack(index, i);
     }
   });
-  expect(gameboard.isGameOver()).toBeTruthy();
+  expect(gameboard.allShipsSunk()).toBeTruthy();
   console.log(ships);
 });
