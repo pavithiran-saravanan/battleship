@@ -23,30 +23,28 @@ export default function renderStaticContent() {
   boards.append(playerBoard, computerBoard);
 }
 
-export function placeShips(pBoard, cBoard) {
-  const playerBoard = document.querySelector(".player-board");
+function renderHelper(domBoard, board) {
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
-      const cell = pBoard[i][j];
+      const cell = board[i][j];
+      const domCell = domBoard.querySelector(
+        `[data-row = "${i}"][data-col = "${j}"]`,
+      );
       if (cell.hasShip) {
-        const domCell = playerBoard.querySelector(
-          `[data-row = "${i}"][data-col = "${j}"]`,
-        );
-        domCell.classList.add("ship");
-      }
+        if (cell.isHit) domCell.classList.add("hit");
+        else domCell.classList.add("ship");
+      } else if (cell.isHit) domCell.classList.add("miss");
     }
   }
+}
 
-  const computerBoard = document.querySelector(".computer-board");
-  for (let i = 0; i < 10; i += 1) {
-    for (let j = 0; j < 10; j += 1) {
-      const cell = cBoard[i][j];
-      if (cell.hasShip) {
-        const domCell = computerBoard.querySelector(
-          `[data-row = "${i}"][data-col = "${j}"]`,
-        );
-        domCell.classList.add("ship");
-      }
-    }
+export function renderShips(pBoard, cBoard) {
+  if (pBoard) {
+    const playerBoard = document.querySelector(".player-board");
+    renderHelper(playerBoard, pBoard);
+  }
+  if (cBoard) {
+    const computerBoard = document.querySelector(".computer-board");
+    renderHelper(computerBoard, cBoard);
   }
 }

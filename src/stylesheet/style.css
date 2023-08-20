@@ -15,6 +15,7 @@
 .game-board{
   display: inline-grid;
   grid-template-columns: repeat(10, auto);
+  border: 0.5px solid rgb(145, 160, 179);
 }
 .cell{
   width: 30px ;
@@ -24,13 +25,24 @@
 }
 
 .cell.ship{
-  background-color: rgb(65, 90, 128);
+  background-color: rgb(33, 68, 121);
 }
 
 .cell.miss{
-  background-color: red;
+  position: relative;
+}
+.cell.miss::after{
+  position: absolute;
+  content: 'x';
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  font-weight: 500;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: rgb(65, 90, 128);
 }
 
 .cell.ship.hit{
-  background-color: green;
+  background-color: rgb(160, 40, 40);
 }
