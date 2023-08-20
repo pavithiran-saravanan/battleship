@@ -1,12 +1,16 @@
 import getComputer from "./computer";
+import renderStaticContent, { placeShips } from "./dom";
 import getPlayer from "./player";
+import "../stylesheet/style.css";
+
+renderStaticContent();
 
 const player = getPlayer();
 const computer = getComputer();
 player.placeShips();
 computer.placeShips();
+placeShips(player.gameBoard.board, computer.gameBoard.board);
 let turns = 1;
-
 console.log(player.gameBoard.board, computer.gameBoard.board);
 
 function computerAttacks() {
