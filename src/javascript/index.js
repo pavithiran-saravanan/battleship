@@ -33,29 +33,36 @@ function shipsSunk(obj) {
   return obj.gameBoard.ships.filter((ship) => ship.isSunk()).length;
 }
 
-while (true) {
-  console.log(`TURN ${turns}`);
+let turn = 1;
 
-  // Player's turn
-  const playerTarget = playerAttacks();
-  renderShips(null, cBoard);
-  console.log(`Player's Turn (${playerTarget.row}, ${playerTarget.col})`);
-  console.log(`Comp Ships Sunk: ${shipsSunk(computer)}`);
-  if (computer.gameBoard.allShipsSunk()) {
-    console.log("*** GAME OVER. PLAYER WON ***");
-    break;
+function game() {
+  if (turn) {
+    // Player's turn
+    const playerTarget = playerAttacks();
+    renderShips(null, cBoard);
+    console.log(`Player's Turn (${playerTarget.row}, ${playerTarget.col})`);
+    console.log(`Comp Ships Sunk: ${shipsSunk(computer)}`);
+    if (computer.gameBoard.allShipsSunk()) {
+      console.log("*** GAME OVER. PLAYER WON ***");
+      return;
+    }
+  } else {
+    // Computer's turn
+    const computerTarget = computerAttacks();
+    renderShips(pBoard, null);
+    console.log(
+      `Computer's Turn (${computerTarget.row}, ${computerTarget.col})`,
+    );
+    console.log(`Player Ships Sunk: ${shipsSunk(player)}`);
+    if (player.gameBoard.allShipsSunk()) {
+      console.log("*** GAME OVER. COMPUTER WON ***");
+      return;
+    }
+    console.log("--------------------------------------------------------");
   }
 
-  // Computer's turn
-  const computerTarget = computerAttacks();
-  renderShips(pBoard, null);
-  console.log(`Computer's Turn (${computerTarget.row}, ${computerTarget.col})`);
-  console.log(`Player Ships Sunk: ${shipsSunk(player)}`);
-  if (player.gameBoard.allShipsSunk()) {
-    console.log("*** GAME OVER. COMPUTER WON ***");
-    break;
-  }
-
-  console.log("--------------------------------------------------------");
-  turns += 1;
+  turn = !turn;
+  setTimeout(game, 500);
 }
+
+game();
