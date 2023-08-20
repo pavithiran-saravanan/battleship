@@ -7,9 +7,11 @@ test("10x10 Board", () => {
     hasShip: false,
     ship: undefined,
   };
-  expect(gameboard.board[0][0]).toEqual(obj);
-  expect(gameboard.board[4][4]).toEqual(obj);
-  expect(gameboard.board[9][9]).toEqual(obj);
+  gameboard.board.forEach(row => {
+    row.forEach(cell => {
+      expect(cell).toEqual(obj);
+    })
+  })
 });
 
 test("Placing ship at a valid position along x axis", () => {
@@ -53,7 +55,7 @@ test("Attack: Hit and Miss", () => {
   gameboard.placeShip(0, 0, 0, "x");
   expect(gameboard.receiveAttack(0, 0)).toBeTruthy();
   expect(gameboard.receiveAttack(0, 0)).toBeFalsy();
-  expect(gameboard.receiveAttack(1, 0)).toBeFalsy();
+  expect(gameboard.receiveAttack(1, 0)).toBeTruthy();
 });
 
 test("Ship is sunk", () => {
@@ -76,5 +78,4 @@ test("All Ships are sunk", () => {
     }
   });
   expect(gameboard.allShipsSunk()).toBeTruthy();
-  console.log(ships);
 });

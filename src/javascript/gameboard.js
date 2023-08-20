@@ -24,28 +24,32 @@ function getShips() {
   return [getShip(5), getShip(4), getShip(3), getShip(3), getShip(2)];
 }
 
+export function randNum() {
+  return Math.floor(Math.random() * 10);
+}
+
 export default function getGameBoard() {
   const ships = getShips();
   const placement = Array(5).fill(null);
   const board = createBoard();
 
   // Returns the name of ship given the Ship Id
-  function getShipName(id) {
-    switch (id) {
-      case 0:
-        return "Carrier";
-      case 1:
-        return "Battleship";
-      case 2:
-        return "Cruiser";
-      case 3:
-        return "Submarine";
-      case 4:
-        return "Destroyer";
-      default:
-        return "Ship";
-    }
-  }
+  // function getShipName(id) {
+  //   switch (id) {
+  //     case 0:
+  //       return "Carrier";
+  //     case 1:
+  //       return "Battleship";
+  //     case 2:
+  //       return "Cruiser";
+  //     case 3:
+  //       return "Submarine";
+  //     case 4:
+  //       return "Destroyer";
+  //     default:
+  //       return "Ship";
+  //   }
+  // }
 
   // Check if given postition lies on board
   function isOnBoard(row, col) {
@@ -86,10 +90,6 @@ export default function getGameBoard() {
   }
 
   // Place all ships at random positions
-  function randNum() {
-    return Math.floor(Math.random() * 9);
-  }
-
   function randDir() {
     return Math.floor(Math.random() * 2) === 1 ? "x" : "y";
   }
@@ -110,9 +110,8 @@ export default function getGameBoard() {
     if (cell.hasShip) {
       const shipId = cell.ship;
       ships[shipId].hit();
-      return true;
     }
-    return false;
+    return true;
   }
 
   // Check if all ships have been sunk
