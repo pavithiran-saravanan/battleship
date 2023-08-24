@@ -23,7 +23,7 @@ export default function renderStaticContent() {
   boards.append(playerBoard, computerBoard);
 }
 
-function renderHelper(domBoard, board) {
+function renderHelper(domBoard, board, hideShips = false) {
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
       const cell = board[i][j];
@@ -32,7 +32,10 @@ function renderHelper(domBoard, board) {
       );
       if (cell.hasShip) {
         if (cell.isHit) domCell.classList.add("hit");
-        else domCell.classList.add("ship");
+        else {
+          domCell.classList.add("ship");
+          if (hideShips) domCell.classList.add("hidden");
+        }
       } else if (cell.isHit) domCell.classList.add("miss");
     }
   }
@@ -45,6 +48,6 @@ export function renderShips(pBoard, cBoard) {
   }
   if (cBoard) {
     const computerBoard = document.querySelector(".computer-board");
-    renderHelper(computerBoard, cBoard);
+    renderHelper(computerBoard, cBoard, true);
   }
 }

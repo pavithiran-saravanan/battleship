@@ -24,6 +24,10 @@
   border: 0.5px solid rgb(145, 160, 179);
 }
 
+.cell.ship.hidden {
+  background-color: rgb(230, 239, 247);
+}
+
 .cell.ship{
   background-color: rgb(33, 68, 121);
 }
