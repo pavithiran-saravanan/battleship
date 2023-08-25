@@ -13,8 +13,8 @@ export default function getGame() {
 
   // Computer Turn
   function computerTurn() {
-    const computerBoard = document.querySelector(".computer-board");
-    const playerBoard = document.querySelector(".player-board");
+    // const computerBoard = document.querySelector(".computer-board");
+    // const playerBoard = document.querySelector(".player-board");
     let target = computer.play();
     while (!player.gameBoard.receiveAttack(target.row, target.col)) {
       target = computer.play();
@@ -23,10 +23,6 @@ export default function getGame() {
     if (player.gameBoard.allShipsSunk()) {
       announceWinner("Computer");
     } else {
-      // setTimeout(() => {
-      //     computerBoard.classList.remove("focus");
-      //     playerBoard.classList.add("focus");
-      // }, 100);
       playerTurn();
     }
   }
@@ -34,7 +30,7 @@ export default function getGame() {
   // Player Turn
   function playerTurn() {
     const computerBoard = document.querySelector(".computer-board");
-    const playerBoard = document.querySelector(".player-board");
+    // const playerBoard = document.querySelector(".player-board");
     const cells = computerBoard.querySelectorAll(".cell");
     cells.forEach((cell) => {
       cell.addEventListener("click", () => {
@@ -49,10 +45,6 @@ export default function getGame() {
           } else {
             setTimeout(computerTurn, 0);
           }
-          // setTimeout(() => {
-          //   computerBoard.classList.add('focus');
-          //   playerBoard.classList.remove('focus');
-          // }, 100);
         }
       });
     });
@@ -70,8 +62,6 @@ export default function getGame() {
     player.clearShips();
     computer.clearShips();
     clearDomShips();
-    document.querySelector(".computer-board").classList.remove("focus");
-    document.querySelector(".player-board").classList.remove("focus");
 
     // Start
     start();

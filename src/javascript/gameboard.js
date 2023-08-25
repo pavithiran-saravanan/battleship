@@ -123,8 +123,8 @@ export default function getGameBoard() {
   }
 
   function clearShips() {
-    for (let i = 0; i < 10; i += 1){
-      for (let j = 0; j < 10; j += 1){
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
         const cell = board[i][j];
         cell.isHit = false;
         cell.hasShip = false;
@@ -132,8 +132,11 @@ export default function getGameBoard() {
         // console.log(cell);
       }
     }
-    for (let i = 0; i < 5; i += 1){
+    for (let i = 0; i < 5; i += 1) {
       placement[i] = null;
+    }
+    for (let i = 0; i < ships.length; i += 1) {
+      ships[i].reset();
     }
   }
 
@@ -144,6 +147,6 @@ export default function getGameBoard() {
     placeShipsRandom,
     receiveAttack,
     allShipsSunk,
-    clearShips
+    clearShips,
   };
 }

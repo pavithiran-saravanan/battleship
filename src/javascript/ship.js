@@ -8,11 +8,17 @@ export default function getShip(len) {
     return this.sunk;
   }
 
+  function reset() {
+    this.hits = 0;
+    this.sunk = false;
+  }
+
   return {
     length: len,
     hits: 0,
     sunk: false,
     hit,
     isSunk,
+    reset
   };
 }
