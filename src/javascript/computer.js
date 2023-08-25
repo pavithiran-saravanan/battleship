@@ -8,9 +8,6 @@ export default function getComputer() {
   }
 
   function getCoordinates() {
-    // Listen for a click event on the dom DOM Board
-    // Return the selected cell's position
-    // For now let the selection be randomly generated
     const row = randNum();
     const col = randNum();
     return { row, col };

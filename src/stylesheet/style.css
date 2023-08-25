@@ -2,21 +2,56 @@
   padding: 0px;
   margin: 0px;
   border: 0px;
-  font-family: 'Courier New', Courier, monospace;
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
 body{
   background-color: whitesmoke;
+  position: relative;
+  font-family: 'Black Ops One', cursive;
+  color: #333;
+}
+
+button{
+  font-family: 'Black Ops One', cursive;
+}
+
+.battleship-title{
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+  color: #333;
+  margin-top: 40px;
 }
 
 .boards{
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 30px;
-  margin-top: 100px;
+  gap: 50px;
+  margin-top: 40px;
 }
+
+.content > .play-again-btn{
+  display: block;
+  width: 200px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.player-container,
+.computer-container {
+  display: grid;
+  gap: 10px;
+  place-items: center;
+}
+
+.player-title,
+.computer-title {
+  font-size: 25px;
+}
+
 .game-board{
   display: inline-grid;
   grid-template-columns: repeat(10, auto);
@@ -33,7 +68,6 @@ body{
   position: absolute;
   content: '⌖';
   font-size: 45px;
-  font-weight: 500;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -49,9 +83,6 @@ body{
   background-color: #555;
 }
 
-.cell.miss{
-}
-
 .cell.ship.hit{
   background-color: rgb(226, 71, 71);
 }
@@ -64,7 +95,6 @@ body{
   position: absolute;
   content: '〰';
   font-size: 22px;
-  font-weight: 600;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -74,16 +104,56 @@ body{
 .cell.ship.hit::after{
   position: absolute;
   font-size: 30px;
-  font-weight: 600;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   content: '✷';
   color: rgb(172, 38, 38);
-  font-size: 40px;
-  z-index: 10;
+  font-size: 30px;
+  margin-top: 2px;
 }
 
 .computer-board .cell.ship.hit::before, .computer-board .cell.miss::before{
   content: none;
+}
+
+.gameover-container{
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.301);
+  backdrop-filter: blur(2px);
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 10;
+  display: grid;
+  place-content: center;
+}
+
+.gameover-options{
+  display: grid;
+  place-items: center;
+  gap: 15px;
+  background-color: white;
+  padding: 30px 50px;
+  width: 300px;
+  height: 150px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 8px rgb(172, 172, 172)
+}
+
+.announce-winner{
+  font-size: 25px;
+  color: #666;
+}
+
+.play-again-btn{
+  width: 120px;
+  height: 30px;
+  border: 2px solid #666;
+  color: #666;
+}
+
+.hide{
+  visibility: hidden;
 }

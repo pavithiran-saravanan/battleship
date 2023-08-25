@@ -8,5 +8,6 @@ game.start();
 
 const playAgain = document.querySelector('.play-again-btn')
 playAgain.addEventListener("click", () => {
+  playAgain.parentElement.parentElement.classList.toggle('hide');
   game.restart();
 });

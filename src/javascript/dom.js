@@ -11,23 +11,33 @@ function getBoard() {
   return board;
 }
 
-function getGameOver() {
-  const container = comp("div", "gameover-container");
-  const options = comp("div", "gameover-options");
-  const announceWinner = comp("div", "announce-winner");
-  announceWinner.textContent = "Player Won";
+function getPlayAgain() {
   const playAgain = comp("button", "play-again-btn");
   playAgain.textContent = "Play Again";
+  return playAgain;
+}
 
-  options.append(announceWinner, playAgain);
+function getGameOver() {
+  const container = comp("div", "gameover-container hide");
+  const options = comp("div", "gameover-options");
+  const announcement = comp("div", "announce-winner");
+  announcement.textContent = "Player Won";
+
+  options.append(announcement, getPlayAgain());
   container.append(options);
   return container;
+}
+
+function getTitle() {
+  const title = comp('div', 'battleship-title');
+  title.textContent = 'BATTLESHIP'
+  return title;
 }
 
 export default function renderStaticContent() {
   const content = document.querySelector(".content");
   const boards = comp("div", "boards");
-  content.append(getGameOver(), boards);
+  content.append(getTitle(), getGameOver(), boards, getPlayAgain());
 
   const playerBoard = getBoard();
   playerBoard.classList.add("player-board");
@@ -97,3 +107,8 @@ export function clearDomShips() {
   });
 }
 
+export function announceWinner(player) {
+  const announcement = document.querySelector('.announce-winner');
+  announcement.textContent = `${player} Won`;
+  document.querySelector('.gameover-container').classList.toggle('hide');
+}

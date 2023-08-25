@@ -1,5 +1,5 @@
 import getComputer from "./computer";
-import { clearDomShips, renderShips } from "./dom";
+import { announceWinner, clearDomShips, renderShips } from "./dom";
 import getPlayer from "./player";
 
 export default function getGame() {
@@ -20,7 +20,7 @@ export default function getGame() {
     }
     renderShips(pBoard, null);
     if (player.gameBoard.allShipsSunk()) {
-      console.log("*** GAME OVER. COMPUTER WON ***");
+      announceWinner("Computer");
     } else {
       computerBoard.style.pointerEvents = "auto";
       playerTurn();
@@ -40,7 +40,7 @@ export default function getGame() {
           console.log("valid attack");
           renderShips(null, cBoard);
           if (computer.gameBoard.allShipsSunk()) {
-            console.log("*** GAME OVER. PLAYER WON ***");
+            announceWinner("Player");
           } else {
             setTimeout(computerTurn, 10);
           }
@@ -56,19 +56,19 @@ export default function getGame() {
     renderShips(pBoard, cBoard);
     setTimeout(playerTurn, 500);
   }
-  
+
   function restart() {
     // Clear ships
     player.clearShips();
     computer.clearShips();
-    clearDomShips()
+    clearDomShips();
 
     // Start
-    start()
+    start();
   }
 
   return {
     start,
-    restart
+    restart,
   };
 }
