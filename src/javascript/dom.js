@@ -18,9 +18,21 @@ export default function renderStaticContent() {
 
   const playerBoard = getBoard();
   playerBoard.classList.add("player-board");
+
   const computerBoard = getBoard();
   computerBoard.classList.add("computer-board");
-  boards.append(playerBoard, computerBoard);
+
+  const playerContainer = comp('div', 'player-container');
+  const computerContainer = comp("div", "computer-container");
+  const playerTitle = comp('div', 'player-title title');
+  playerTitle.textContent = 'Player';
+  const computerTitle = comp('div', 'computer-title');
+  computerTitle.textContent = 'Computer'
+
+  playerContainer.append(playerTitle, playerBoard);
+  computerContainer.append(computerTitle, computerBoard);
+
+  boards.append(playerContainer, computerContainer);
 }
 
 function renderHelper(domBoard, board, hideShips = false) {

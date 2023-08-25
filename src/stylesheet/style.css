@@ -2,7 +2,12 @@
   padding: 0px;
   margin: 0px;
   border: 0px;
-  /* box-sizing: border-box; */
+  font-family: 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: whitesmoke;
 }
 
 .boards{
@@ -15,38 +20,64 @@
 .game-board{
   display: inline-grid;
   grid-template-columns: repeat(10, auto);
-  border: 0.5px solid rgb(145, 160, 179);
+  border: 1px solid #333;
 }
 .cell{
-  width: 30px ;
-  height: 30px;
-  background-color: rgb(230, 239, 247);
-  border: 0.5px solid rgb(145, 160, 179);
-}
-
-.cell.ship.hidden {
-  background-color: rgb(230, 239, 247);
-}
-
-.cell.ship{
-  background-color: rgb(33, 68, 121);
-}
-
-.cell.miss{
   position: relative;
+  width: 40px ;
+  height: 40px;
+  border: 1px solid #333;
 }
-.cell.miss::after{
+
+.computer-board .cell:hover::before{
   position: absolute;
-  content: 'x';
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 18px;
+  content: '⌖';
+  font-size: 45px;
   font-weight: 500;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  color: rgb(65, 90, 128);
+  color: #555;
+  margin-top: 2px;
+}
+
+.cell.ship.hidden {
+  background-color: transparent;
+}
+
+.cell.ship{
+  background-color: #555;
+}
+
+.cell.miss{
 }
 
 .cell.ship.hit{
-  background-color: rgb(160, 40, 40);
+  background-color: rgb(226, 71, 71);
+}
+
+.cell.miss{
+  background-color: rgb(106, 152, 221);
+}
+
+.cell.ship.hit::after{
+  position: absolute;
+  content: '✷';
+  font-size: 30px;
+  font-weight: 600;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: rgb(61, 120, 207);
+}
+
+.cell.ship.hit::after{
+  content: '✷';
+  color: rgb(172, 38, 38);
+  font-size: 40px;
+  z-index: 10;
+}
+
+.computer-board .cell.ship.hit::before, .computer-board .cell.miss::before{
+  content: none;
 }
