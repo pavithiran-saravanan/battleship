@@ -30,14 +30,14 @@ button{
   display: flex;
   justify-content: center;
   gap: 50px;
-  margin-top: 40px;
+  margin-top: 15px;
 }
 
 .content > .play-again-btn{
   display: block;
   width: 200px;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .player-container,
@@ -63,6 +63,10 @@ button{
   width: 40px ;
   height: 40px;
   border: 1px solid #333;
+}
+
+.player-board .cell:hover{
+  background-color: #666;
 }
 
 .computer-board .cell:hover::before{
@@ -162,4 +166,27 @@ button{
 .focus{
   pointer-events: none;
   opacity: 70%;
+}
+
+.message-container{
+  margin-top: 20px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.axis-button{
+  font-size: 20px;
+  background-color: #333;
+  color: white;
+  padding: 0px 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.axis-button.hidden{
+  display: none;
 }

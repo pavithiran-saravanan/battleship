@@ -34,22 +34,22 @@ export default function getGameBoard() {
   const board = createBoard();
 
   // Returns the name of ship given the Ship Id
-  // function getShipName(id) {
-  //   switch (id) {
-  //     case 0:
-  //       return "Carrier";
-  //     case 1:
-  //       return "Battleship";
-  //     case 2:
-  //       return "Cruiser";
-  //     case 3:
-  //       return "Submarine";
-  //     case 4:
-  //       return "Destroyer";
-  //     default:
-  //       return "Ship";
-  //   }
-  // }
+  function getShipName(id) {
+    switch (id) {
+      case 0:
+        return "Carrier";
+      case 1:
+        return "Battleship";
+      case 2:
+        return "Cruiser";
+      case 3:
+        return "Submarine";
+      case 4:
+        return "Destroyer";
+      default:
+        return "Ship";
+    }
+  }
 
   // Check if given postition lies on board
   function isOnBoard(row, col) {
@@ -129,7 +129,6 @@ export default function getGameBoard() {
         cell.isHit = false;
         cell.hasShip = false;
         cell.ship = undefined;
-        // console.log(cell);
       }
     }
     for (let i = 0; i < 5; i += 1) {
@@ -148,5 +147,6 @@ export default function getGameBoard() {
     receiveAttack,
     allShipsSunk,
     clearShips,
+    getShipName
   };
 }

@@ -11,7 +11,6 @@ function getBoard() {
   return board;
 }
 
-
 function getPlayAgainPrimary() {
   const playAgain = comp("button", "play-again-btn play-again-btn-primary");
   playAgain.textContent = "Restart Game";
@@ -36,15 +35,43 @@ function getGameOver() {
 }
 
 function getTitle() {
-  const title = comp('div', 'battleship-title');
-  title.textContent = 'BATTLESHIP'
+  const title = comp("div", "battleship-title");
+  title.textContent = "BATTLESHIP";
   return title;
+}
+
+export function toggleAxisButton() {
+  const button = document.querySelector(".axis-button");
+  if (button.style.transform === "rotate(90deg)") {
+    button.style.transform = "rotate(0deg)";
+  } else {
+    button.style.transform = "rotate(90deg)";
+  }
+}
+
+function getMessageBoard() {
+  const message = comp("div", "message");
+  message.textContent = "Place Ship";
+
+  const button = comp("div", "axis-button");
+  button.textContent = "➔";
+  // button.addEventListener("click", toggleAxisButton);
+
+  const container = comp("div", "message-container");
+  container.append(message, button);
+  return container;
 }
 
 export default function renderStaticContent() {
   const content = document.querySelector(".content");
   const boards = comp("div", "boards");
-  content.append(getTitle(), getGameOver(), boards, getPlayAgainPrimary());
+  content.append(
+    getGameOver(),
+    getTitle(),
+    getMessageBoard(),
+    boards,
+    getPlayAgainPrimary(),
+  );
 
   const playerBoard = getBoard();
   playerBoard.classList.add("player-board");
@@ -95,13 +122,15 @@ export function renderShips(pBoard, cBoard) {
 }
 
 export function clearDomShips() {
-  const playerCells = document.querySelector('.player-board').querySelectorAll('.cell');
-  playerCells.forEach(cell => {
-    cell.classList.remove('ship');
+  const playerCells = document
+    .querySelector(".player-board")
+    .querySelectorAll(".cell");
+  playerCells.forEach((cell) => {
+    cell.classList.remove("ship");
     cell.classList.remove("hit");
     cell.classList.remove("miss");
     cell.classList.remove("hidden");
-  })
+  });
 
   const computerCells = document
     .querySelector(".computer-board")
@@ -115,7 +144,12 @@ export function clearDomShips() {
 }
 
 export function announceWinner(player) {
-  const announcement = document.querySelector('.announce-winner');
+  const announcement = document.querySelector(".announce-winner");
   announcement.textContent = `${player} Won`;
-  document.querySelector('.gameover-container').classList.toggle('hide');
+  document.querySelector(".gameover-container").classList.toggle("hide");
+}
+
+export function setMessage(msg) {
+  const message = document.querySelector(".message");
+  message.textContent = msg;
 }

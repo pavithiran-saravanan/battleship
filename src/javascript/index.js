@@ -4,7 +4,7 @@ import getGame from "./game";
 
 renderStaticContent();
 const game = getGame();
-game.start();
+game.placePlayerShips();
 
 const playAgain = document.querySelector(".play-again-btn");
 playAgain.addEventListener("click", () => {

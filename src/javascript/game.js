@@ -1,11 +1,19 @@
 import getComputer from "./computer";
-import { announceWinner, clearDomShips, renderShips } from "./dom";
+import {
+  announceWinner,
+  clearDomShips,
+  renderShips,
+  setMessage,
+  toggleAxisButton,
+} from "./dom";
 import getPlayer from "./player";
 
 export default function getGame() {
   // Get Players
   const player = getPlayer();
   const computer = getComputer();
+  let shipId = 0;
+  let axis = 0;
 
   // Board matrices
   const pBoard = player.gameBoard.board;
@@ -24,6 +32,7 @@ export default function getGame() {
       announceWinner("Computer");
     } else {
       playerTurn();
+      setMessage("Player's Turn");
     }
   }
 
@@ -37,8 +46,6 @@ export default function getGame() {
         const row = cell.getAttribute("data-row");
         const col = cell.getAttribute("data-col");
         if (computer.gameBoard.receiveAttack(row, col)) {
-          console.log(row, col);
-          console.log("valid attack");
           renderShips(null, cBoard);
           if (computer.gameBoard.allShipsSunk()) {
             announceWinner("Player");
@@ -50,10 +57,58 @@ export default function getGame() {
     });
   }
 
+  function shipPlacementHandler(e) {
+    const cell = e.target;
+    const computerBoard = document.querySelector(".computer-board");
+    const playerBoard = document.querySelector(".player-board");
+    const cells = playerBoard.querySelectorAll(".cell");
+
+    const row = cell.getAttribute("data-row");
+    const col = cell.getAttribute("data-col");
+    if (player.gameBoard.placeShip(+shipId, +row, +col, axis ? "y" : "x")) {
+      shipId += 1;
+      if (shipId < 5) {
+        setMessage(`Place ${player.gameBoard.getShipName(shipId)}`);
+      } else {
+        computerBoard.style.pointerEvents = "all";
+        playerBoard.style.pointerEvents = "none";
+        cells.forEach((c) => {
+          c.removeEventListener("click", shipPlacementHandler);
+        });
+        document.querySelector(".axis-button").classList.add("hidden");
+        start();
+      }
+      renderShips(pBoard, null);
+    }
+  }
+
+  function axisHandler() {
+    axis = !axis;
+    toggleAxisButton();
+  }
+
+  function placePlayerShips() {
+    const computerBoard = document.querySelector(".computer-board");
+    const playerBoard = document.querySelector(".player-board");
+    computerBoard.style.pointerEvents = "none";
+    setMessage(`Place ${player.gameBoard.getShipName(shipId)}`);
+
+    // Add event listeners to player cells
+    const cells = playerBoard.querySelectorAll(".cell");
+
+    // Axis button click event handler
+    const axisbutton = document.querySelector(".axis-button");
+    axisbutton.addEventListener("click", axisHandler);
+
+    cells.forEach((cell) => {
+      cell.addEventListener("click", shipPlacementHandler);
+    });
+  }
+
   function start() {
-    player.placeShips();
     computer.placeShips();
     renderShips(pBoard, cBoard);
+    setMessage("Player's Turn");
     setTimeout(playerTurn, 500);
   }
 
@@ -62,13 +117,20 @@ export default function getGame() {
     player.clearShips();
     computer.clearShips();
     clearDomShips();
+    document.querySelector(".axis-button").removeEventListener('click', axisHandler);
 
     // Start
-    start();
+    shipId = 0;
+    axis = 0;
+    document.querySelector(".player-board").style.pointerEvents = "all";
+    document.querySelector(".axis-button").classList.remove("hidden");
+    document.querySelector(".axis-button").style.transform = "rotate(0deg)";
+    placePlayerShips();
   }
 
   return {
     start,
     restart,
+    placePlayerShips,
   };
 }
