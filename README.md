@@ -23,7 +23,7 @@ Check out the live demo of the project here https://pavithiran-saravanan.github.
 
 # Screenshots
 ![image](https://github.com/pavithiran-saravanan/battleship/assets/63770646/23880c59-ae7d-4659-9049-2368ec41c3b4)
-![image](https://github.com/pavithiran-saravanan/battleship/assets/63770646/4844b396-0e88-4beb-acc6-b550d6709e7e)
+![image](https://github.com/pavithiran-saravanan/battleship/assets/63770646/5567c0f4-c1c2-4c7a-88e6-b7b06f04d333)
 
 # Author
 ### Pavithiran Saravanan
