@@ -11,6 +11,13 @@ function getBoard() {
   return board;
 }
 
+
+function getPlayAgainPrimary() {
+  const playAgain = comp("button", "play-again-btn play-again-btn-primary");
+  playAgain.textContent = "Restart Game";
+  return playAgain;
+}
+
 function getPlayAgain() {
   const playAgain = comp("button", "play-again-btn");
   playAgain.textContent = "Play Again";
@@ -37,7 +44,7 @@ function getTitle() {
 export default function renderStaticContent() {
   const content = document.querySelector(".content");
   const boards = comp("div", "boards");
-  content.append(getTitle(), getGameOver(), boards, getPlayAgain());
+  content.append(getTitle(), getGameOver(), boards, getPlayAgainPrimary());
 
   const playerBoard = getBoard();
   playerBoard.classList.add("player-board");

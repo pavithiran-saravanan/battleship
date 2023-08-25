@@ -6,8 +6,11 @@ renderStaticContent();
 const game = getGame();
 game.start();
 
-const playAgain = document.querySelector('.play-again-btn')
+const playAgain = document.querySelector(".play-again-btn");
 playAgain.addEventListener("click", () => {
-  playAgain.parentElement.parentElement.classList.toggle('hide');
+  playAgain.parentElement.parentElement.classList.toggle("hide");
   game.restart();
 });
+
+const playAgainPrimary = document.querySelector(".play-again-btn-primary");
+playAgainPrimary.addEventListener("click", () => game.restart());
