@@ -20,9 +20,14 @@ export default function getPlayer() {
     return getCoordinates();
   }
 
+  function clearShips() {
+    gameBoard.clearShips();
+  }
+
   return {
     gameBoard,
     placeShips,
     play,
+    clearShips
   };
 }

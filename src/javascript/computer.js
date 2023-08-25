@@ -20,9 +20,14 @@ export default function getComputer() {
     return getCoordinates();
   }
 
+  function clearShips() {
+    gameBoard.clearShips();
+  }
+
   return {
     gameBoard,
     placeShips,
     play,
+    clearShips
   };
 }

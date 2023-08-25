@@ -1,5 +1,5 @@
 import getComputer from "./computer";
-import { renderShips } from "./dom";
+import { clearDomShips, renderShips } from "./dom";
 import getPlayer from "./player";
 
 export default function getGame() {
@@ -56,7 +56,19 @@ export default function getGame() {
     renderShips(pBoard, cBoard);
     setTimeout(playerTurn, 500);
   }
+  
+  function restart() {
+    // Clear ships
+    player.clearShips();
+    computer.clearShips();
+    clearDomShips()
+
+    // Start
+    start()
+  }
+
   return {
-    start
+    start,
+    restart
   };
 }

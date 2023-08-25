@@ -60,10 +60,10 @@ body{
   background-color: rgb(106, 152, 221);
 }
 
-.cell.ship.hit::after{
+.cell.miss::after, .cell.ship.hit::after{
   position: absolute;
-  content: '✷';
-  font-size: 30px;
+  content: '〰';
+  font-size: 22px;
   font-weight: 600;
   top: 50%;
   left: 50%;
@@ -72,6 +72,12 @@ body{
 }
 
 .cell.ship.hit::after{
+  position: absolute;
+  font-size: 30px;
+  font-weight: 600;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
   content: '✷';
   color: rgb(172, 38, 38);
   font-size: 40px;

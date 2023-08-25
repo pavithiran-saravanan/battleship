@@ -11,10 +11,23 @@ function getBoard() {
   return board;
 }
 
+function getGameOver() {
+  const container = comp("div", "gameover-container");
+  const options = comp("div", "gameover-options");
+  const announceWinner = comp("div", "announce-winner");
+  announceWinner.textContent = "Player Won";
+  const playAgain = comp("button", "play-again-btn");
+  playAgain.textContent = "Play Again";
+
+  options.append(announceWinner, playAgain);
+  container.append(options);
+  return container;
+}
+
 export default function renderStaticContent() {
   const content = document.querySelector(".content");
   const boards = comp("div", "boards");
-  content.append(boards);
+  content.append(getGameOver(), boards);
 
   const playerBoard = getBoard();
   playerBoard.classList.add("player-board");
@@ -22,12 +35,12 @@ export default function renderStaticContent() {
   const computerBoard = getBoard();
   computerBoard.classList.add("computer-board");
 
-  const playerContainer = comp('div', 'player-container');
+  const playerContainer = comp("div", "player-container");
   const computerContainer = comp("div", "computer-container");
-  const playerTitle = comp('div', 'player-title title');
-  playerTitle.textContent = 'Player';
-  const computerTitle = comp('div', 'computer-title');
-  computerTitle.textContent = 'Computer'
+  const playerTitle = comp("div", "player-title title");
+  playerTitle.textContent = "Player";
+  const computerTitle = comp("div", "computer-title");
+  computerTitle.textContent = "Computer";
 
   playerContainer.append(playerTitle, playerBoard);
   computerContainer.append(computerTitle, computerBoard);
@@ -63,3 +76,24 @@ export function renderShips(pBoard, cBoard) {
     renderHelper(computerBoard, cBoard, true);
   }
 }
+
+export function clearDomShips() {
+  const playerCells = document.querySelector('.player-board').querySelectorAll('.cell');
+  playerCells.forEach(cell => {
+    cell.classList.remove('ship');
+    cell.classList.remove("hit");
+    cell.classList.remove("miss");
+    cell.classList.remove("hidden");
+  })
+
+  const computerCells = document
+    .querySelector(".computer-board")
+    .querySelectorAll(".cell");
+  computerCells.forEach((cell) => {
+    cell.classList.remove("ship");
+    cell.classList.remove("hit");
+    cell.classList.remove("miss");
+    cell.classList.remove("hidden");
+  });
+}
+
