@@ -15,8 +15,7 @@ Check out the live demo of the project here https://pavithiran-saravanan.github.
 - Babel
 
 # Features
-- Place 5 ships at desired coordinates on your board
-- Every ship can be placed along x or y axis
+- Allow player to place ships at desired coordinates on their board
 - Make attacks on the computer's board by selecting the desired cell
 - Option to restart game at any point
 - The game ends when all of the ships of a player are sunk
